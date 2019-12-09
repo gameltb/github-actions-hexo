@@ -14,6 +14,7 @@ COPY README.md LICENSE entrypoint.sh /
 RUN apk add --no-cache git
 RUN apk add --no-cache openssh
 RUN apk add --no-cache curl
+RUN apk add --no-cache findutils gawk
 
 RUN chmod +x /entrypoint.sh
 

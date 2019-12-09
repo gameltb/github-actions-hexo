@@ -53,6 +53,14 @@ jobs:
           username: YOUR_USER_NAME
           email: YOUR_EMAIL_ADDRESS
 ```
+### Create post by action
+
+```shell
+echo title > n
+git add n
+git commit 
+git push
+```
 
 ### Inputs
 
@@ -67,7 +75,7 @@ jobs:
 | if_update_cloudflare | boolean |          | false             | Whether update cloudflare                                                |
 | cloudflare_zone      | string  |          |                   | the cloudflare zone                                                      |
 | cloudflare_token     | secrets |          |                   | Your cloudflare token                                                    |
-| new_post             | boolean |          | false             | Just create new post. Default at branch 'raw'                            |
+| use_new_post_cmd     | boolean |          | false             | Create new post by action. Default at branch 'raw'                       |
 
 ### License
 

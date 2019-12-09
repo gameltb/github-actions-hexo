@@ -16,11 +16,14 @@ npm install hexo-deployer-git
 npm install
 
 # create new hexo post
-if ${INPUT_NEW_POST}; then
-    hexo new writing
-    remote_repo="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+if [ "x"${INPUT_USE_NEW_POST_CMD} == "xtrue" ] && [ -f n ]; then
+    hexo n "`head -n1 n | awk  -F '\0'  '{print $2}'`" "`head -n1 n | awk  -F '\0'  '{print $1}'`"
+    rm n
+    find ./source -type d -empty -print0 | xargs -0 -I {} touch "{}"/.gitignore
+    git add .
+    remote_repo="git@github.com:${GITHUB_REPOSITORY}.git"
     git commit -m "commit by github action new post" -a
-    git push "${remote_repo}" HEAD:${INPUT_BRANCH:-raw}
+    git push "${remote_repo}" HEAD:${INPUT_BRANCH}
     exit
 fi
 
@@ -29,8 +32,6 @@ hexo g
 hexo d
 
 # update files
-INPUT_BRANCH=${INPUT_BRANCH:-raw}
-
 if ${INPUT_IF_UPDATE_FILES}; then
     [ -z "${INPUT_GITHUB_TOKEN}" ] && {
         echo 'Missing input "github_token: ${{ secrets.GITHUB_TOKEN }}".'
