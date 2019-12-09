@@ -12,14 +12,24 @@ git config --global user.email "${INPUT_EMAIL}"
 
 # setup hexo env
 npm install -g hexo-cli
+npm install hexo-deployer-git
 npm install
+
+# create new hexo post
+if ${INPUT_NEW_POST}; then
+    hexo new writing
+    remote_repo="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+    git commit -m "commit by github action new post" -a
+    git push "${remote_repo}" HEAD:${INPUT_BRANCH:-raw}
+    exit
+fi
 
 # generate&publish
 hexo g
 hexo d
 
 # update files
-INPUT_BRANCH=${INPUT_BRANCH:-master}
+INPUT_BRANCH=${INPUT_BRANCH:-raw}
 
 if ${INPUT_IF_UPDATE_FILES}; then
     [ -z "${INPUT_GITHUB_TOKEN}" ] && {

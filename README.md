@@ -63,11 +63,11 @@ jobs:
 | email                | string  | **Yes**  |          | Your email address                                                      |
 | if_update_files      | boolean |          | false    | Whether update the source file after generate                           |
 | github_token         | secrets |          |          | Token for the repo. Can be passed in using $\{{ secrets.GITHUB_TOKEN }} |
-| branch               | string  |          | 'master' | The branch of the blog source code                                      |
+| branch               | string  |          | 'raw'    | The branch of the blog source code                                      |
 | if_update_cloudflare | boolean |          | false    | Whether update cloudflare                                               |
 | cloudflare_zone      | string  |          |          | the cloudflare zone                                                     |
 | cloudflare_token     | secrets |          |          | Your cloudflare token                                                   |
-
+| new_post             | boolean |          | false    | Just create new post. Default at branch 'raw'                           |
 ### License
 
 The Dockerfile and associated scripts and documentation in this project are released under the [MIT License](https://github.com/yrpang/github-actions-hexo/blob/master/LICENSE).
