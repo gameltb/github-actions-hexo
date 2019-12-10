@@ -31,21 +31,6 @@ fi
 hexo g
 hexo d
 
-# update files
-if ${INPUT_IF_UPDATE_FILES}; then
-    [ -z "${INPUT_GITHUB_TOKEN}" ] && {
-        echo 'Missing input "github_token: ${{ secrets.GITHUB_TOKEN }}".'
-        exit 1
-    }
-    remote_repo="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-    if [ -z "$(git status --porcelain)" ]; then
-        echo "nothing to update."
-    else
-        git commit -m "triggle by commit ${GITHUB_SHA}" -a
-        git push "${remote_repo}" HEAD:${INPUT_BRANCH}
-    fi
-fi
-
 # Purge cache in CloudFlare
 if ${INPUT_IF_UPDATE_CLOUDFLARE}; then
     [ -z "${INPUT_CLOUDFLARE_TOKEN}" ] && {

@@ -53,12 +53,13 @@ jobs:
           username: YOUR_USER_NAME
           email: YOUR_EMAIL_ADDRESS
 ```
+
 ### Create post by action
 
 ```shell
 echo title > n
 git add n
-git commit 
+git commit
 git push
 ```
 
@@ -69,13 +70,12 @@ git push
 | deploykey            | secrets | **Yes**  |                   | The deploy key of your GitHub Page repository                            |
 | username             | string  |          | GitHub Action     | Your user name                                                           |
 | email                | string  |          | action@github.com | Your email address                                                       |
-| if_update_files      | boolean |          | false             | Whether update the source file after generate                            |
 | github_token         | secrets |          |                   | Token for the repo. Can be passed in using \$\{{ secrets.GITHUB_TOKEN }} |
-| branch               | string  |          | 'raw'             | The branch of the blog source code                                       |
+| branch               | string  |          | 'master'          | The branch of the blog source code                                       |
 | if_update_cloudflare | boolean |          | false             | Whether update cloudflare                                                |
 | cloudflare_zone      | string  |          |                   | the cloudflare zone                                                      |
 | cloudflare_token     | secrets |          |                   | Your cloudflare token                                                    |
-| use_new_post_cmd     | boolean |          | false             | Create new post by action. Default at branch 'raw'                       |
+| use_new_post_cmd     | boolean |          | false             | Create new post by action. Default at branch 'master'                    |
 
 ### License
 
